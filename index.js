@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 
 const https = require('https');
 const http  = require('http');
@@ -32,7 +32,7 @@ async function getNodes() {
 
 }
 
-http.createServer(handle_http_request).listen(/*process.env.PORT ||*/ 3000);
+http.createServer(handle_http_request).listen(process.env.PORT || 3000);
 
 async function handle_http_request(request, response){
 	var nodes_str = await getNodes();
