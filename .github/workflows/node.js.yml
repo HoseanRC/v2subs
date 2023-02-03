@@ -5,7 +5,7 @@ name: Build node list
 
 on:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '15 * * * *'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
