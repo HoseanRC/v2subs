@@ -33,6 +33,7 @@ async function getNodes() {
 	var hosts_array = [];
 	var nodes_array = nodes_str.split("\n");
 	var nodes_output = "";
+	console.log(`${nodes_array.length} nodes in total...`);
 	for(var i = 0; i < nodes_array.length; i++){
 		var node = nodes_array[i];
 		let hostname = "";
@@ -62,6 +63,7 @@ async function getNodes() {
 		}
 	}
 	fs.writeFile('./nodes.txt', nodes_output, err => {
+		console.log(`\n${nodes_output.split("\n").length-1} unique nodes!`);
 		if (err) {
 			console.error(err);
 		}
