@@ -29,17 +29,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Build list
-        run: |
-          touch nodes.txt
-          npm start
-          ls
-      - uses: actions/checkout@v3
+        run: npm start
+#      - uses: actions/checkout@v3
       - name: push to origin
         if: success() || failure()
         run: |
-          pwd
-          ls
-          git status
           date > generation-date.txt
           git remote set-url --push origin https://HoseanRC:$GITHUB_TOKEN@github.com/HoseanRC/v2subs.git
           git config user.name github-actions
