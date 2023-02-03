@@ -23,12 +23,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-    - name: Build list
-      run: npm start
-    - name: push to origin
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "generated"
-        git push
+      - name: Build list
+        run: npm start
+      - name: push to origin
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
