@@ -29,7 +29,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Build list
+        run: touch nodes.txt
         run: npm start
+        run: ls
       - uses: actions/checkout@v3
       - name: push to origin
         if: success() || failure()
