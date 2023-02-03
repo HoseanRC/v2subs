@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-
+console.log("Current directory:", __dirname);
 async function getNodes() {
  	return new Promise(async (resolve, reject) => {
 
