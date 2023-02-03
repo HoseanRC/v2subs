@@ -62,7 +62,7 @@ async function getNodes() {
 			nodes_output += "\n";
 		}
 	}
-	fs.writeFile('./nodes.txt', nodes_output, err => {
+	fs.writeFile('nodes.txt', nodes_output, err => {
 		console.log(`\n${nodes_output.split("\n").length-1} unique nodes!`);
 		if (err) {
 			console.error(err);
