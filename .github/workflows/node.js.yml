@@ -34,6 +34,7 @@ jobs:
       - name: push to origin
         if: success() || failure()
         run: |
+          pwd
           ls
           git status
           date > generation-date.txt
