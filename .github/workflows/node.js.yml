@@ -6,7 +6,7 @@ name: Build node list
 on:
   schedule:
     branches: [ "main" ]
-    - cron: '30 * * * *'
+    cron: '30 * * * *'
 
 jobs:
   build:
