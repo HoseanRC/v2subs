@@ -32,14 +32,12 @@ jobs:
         run: npm start
       - uses: actions/checkout@v3
       - name: push to origin
+        if: success() || failure()
         run: |
           date > generation-date.txt
-          ls
-          git status
           git remote set-url --push origin https://HoseanRC:$GITHUB_TOKEN@github.com/HoseanRC/v2subs.git
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
           git commit -m "[`date`] update nodes"
-          git status
           git push
