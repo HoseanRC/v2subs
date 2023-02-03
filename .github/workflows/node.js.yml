@@ -34,6 +34,8 @@ jobs:
       - name: push to origin
         if: success() || failure()
         run: |
+          ls
+          git status
           date > generation-date.txt
           git remote set-url --push origin https://HoseanRC:$GITHUB_TOKEN@github.com/HoseanRC/v2subs.git
           git config user.name github-actions
