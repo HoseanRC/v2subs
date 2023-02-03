@@ -1,40 +1,34 @@
-require('dotenv').config();
-
 const https = require('https');
-const http  = require('http');
+const fs = require('fs');
 
 async function getNodes() {
-  return new Promise(async (resolve, reject) => {
+ 	return new Promise(async (resolve, reject) => {
 
-    const options = {
-      hostname: "raw.githubusercontent.com",
-      path: "/songtao1873/clash/main/subscription/others/node.txt",
-      port: 443,
-      method: 'GET'
-    };
+	const options = {
+		hostname: "raw.githubusercontent.com",
+		path: "/songtao1873/clash/main/subscription/others/node.txt",
+		port: 443,
+		method: 'GET'
+	};
 
-    let body = [];
+	let body = [];
 
-    const req = https.request(options, res => {
-      res.on('data', chunk => body.push(chunk));
-      res.on('end', () => {
-        const data = Buffer.concat(body).toString();
-        resolve(data);
-      });
-    });
-    req.on('error', e => {
-      // console.log(`ERROR httpsGet: ${e}`);
-      reject(e);
-    });
-    req.end();
-
-  });
-
+	const req = https.request(options, res => {
+		res.on('data', chunk => body.push(chunk));
+			res.on('end', () => {
+				const data = Buffer.concat(body).toString();
+				resolve(data);
+			});
+		});
+		req.on('error', e => {
+			// console.log(`ERROR httpsGet: ${e}`);
+			reject(e);
+		});
+		req.end();
+	});
 }
 
-http.createServer(handle_http_request).listen(process.env.PORT || 3000);
-
-async function handle_http_request(request, response){
+(new Promise(async (resolve, reject) => {
 	var nodes_str = await getNodes();
 	var hosts_array = [];
 	var nodes_array = nodes_str.split("\n");
@@ -67,6 +61,9 @@ async function handle_http_request(request, response){
 			nodes_output += "\n";
 		}
 	}
-	response.write(nodes_output);
-	response.end();
-}
+	fs.writeFile('./nodes.txt', nodes_output, err => {
+		if (err) {
+			console.error(err);
+		}
+	});
+})).then(()=>{});
