@@ -7,6 +7,9 @@ on:
   schedule:
     - cron: '30 * * * *'
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   build:
     name: Fetch and choose nodes
@@ -29,6 +32,7 @@ jobs:
       - name: push to origin
         run: |
           date > generation-date.txt
+          git remote set-url --push origin https://HoseanRC:$GITHUB_TOKEN@github.com/HoseanRC/v2subs.git
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
