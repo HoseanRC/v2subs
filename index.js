@@ -1,6 +1,8 @@
 const https = require('https');
 const fs = require('fs');
 
+const { exec } = require('child_process');
+
 async function getNodes() {
  	return new Promise(async (resolve, reject) => {
 
@@ -66,6 +68,8 @@ async function getNodes() {
 		console.log(`\n${nodes_output.split("\n").length-1} unique nodes!`);
 		if (err) {
 			console.error(err);
+                        return;
 		}
+                exec(`echo "nodescount=${nodes_output.split("\n").length-1}" >> $GITHUB_ENV`);
 	});
 })).then(()=>{});
